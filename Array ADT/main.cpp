@@ -31,10 +31,23 @@ void Insert(struct Array &arr, int index, int x){
         arr.A[index] = x;
     }
 }
+
+int Delete(struct Array &arr, int index){
+    int x = 0;
+    if(index>=0 && index<arr.length){
+        x = arr.A[index];
+        for(int i = index; i<arr.length - 1; i++){
+            arr.A[i] = arr.A[i+1];
+        }
+        arr.length--;
+        return x;
+    }
+    return 0;
+}
+
 int main(){
     struct Array arr = {{2,4,6,8,0},10,5};
-    Append(arr,10);
-    Insert(arr,0,9);
+    cout<<Delete(arr,0)<<endl;
     Display(arr);
     return 0;
 }
