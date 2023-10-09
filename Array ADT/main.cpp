@@ -64,9 +64,40 @@ int LinearSearch(struct Array &arr, int key){
     return -1;
 }
 
+int BinarySearch(struct Array arr, int key){
+    int l = 0;
+    int r = arr.length - 1;
+    while(l<=r){
+        int mid = l+(r-l)/2;
+        if(arr.A[mid] == key){
+            return mid;
+        } else if(arr.A[mid]<key){
+            l = mid+1;
+        } else {
+            r = mid-1;
+        }
+    }
+    return -1;
+}
+
+int RBinSearch(int A[], int l, int h, int key){
+    if(l<=h){
+        int mid = l+(h-l)/2;
+        if(A[mid] == key){
+            return mid;
+        } else if(A[mid]<key){
+            return RBinSearch(A,mid+1,h,key);
+        } else {
+            return RBinSearch(A,l,mid-1,key);
+        }
+    }
+    return -1;
+}
+
 int main(){
-    struct Array arr = {{2,4,6,8,0},10,5};
-    cout<<LinearSearch(arr,8)<<endl;
+    struct Array arr = {{2,4,6,8,9},10,5};
+    cout<<BinarySearch(arr,9)<<endl;
+    cout<<RBinSearch(arr.A,0,arr.length,3)<<endl;
     Display(arr);
     return 0;
 }
