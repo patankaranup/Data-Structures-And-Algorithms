@@ -94,10 +94,60 @@ int RBinSearch(int A[], int l, int h, int key){
     return -1;
 }
 
+int get(struct Array arr, int idx){
+    if(idx>=0 && idx<arr.length){
+        return arr.A[idx];
+    }
+    return -1;
+}
+
+void set(struct Array &arr, int idx, int val){
+    if(idx>=0 && idx<arr.length){
+        arr.A[idx] = val;
+    }
+}
+
+int maximum(struct Array arr){
+    int maxi = arr.A[0];
+    for(int i=1; i<arr.length; i++){
+        if(arr.A[i] > maxi){
+            maxi = arr.A[i];
+        }
+    }
+    return maxi;
+}
+
+int minimum(struct Array arr){
+    int mini = arr.A[0];
+    for(int i=1; i<arr.length; i++){
+        if(arr.A[i] < mini){
+            mini = arr.A[i];
+        }
+    }
+    return mini;
+}
+
+int Sum(struct Array arr){
+    int s = 0;
+    for(int i=0; i<arr.length; i++){
+        s += arr.A[i];
+    }
+    return s;
+}
+
+float Avg(struct Array arr){
+    return (float)Sum(arr)/arr.length;
+}
+
 int main(){
     struct Array arr = {{2,4,6,8,9},10,5};
-    cout<<BinarySearch(arr,9)<<endl;
-    cout<<RBinSearch(arr.A,0,arr.length,3)<<endl;
+    cout<<get(arr,2)<<endl;
+    set(arr,3,3);
+    Display(arr);
+    cout<<maximum(arr)<<endl;
+    cout<<minimum(arr)<<endl;
+    cout<<Sum(arr)<<endl;
+    cout<<Avg(arr)<<endl;
     Display(arr);
     return 0;
 }
