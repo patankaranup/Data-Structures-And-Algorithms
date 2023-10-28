@@ -158,9 +158,32 @@ void Reverse2(struct Array &arr){
     }
 }
 
+void InsertSort(struct Array &arr, int x){
+    if(arr.length == arr.size){
+        return;
+    }
+    int i = arr.length - 1;
+    while(i>=0 && arr.A[i] > x){
+        arr.A[i+1] = arr.A[i];
+        i--;
+    }
+    arr.A[i+1] = x;
+    arr.length++;
+}
+
+int isSorted(struct Array arr){
+    int i;
+    for(int i=0; i<arr.length-1; i++){
+        if(arr.A[i]>arr.A[i+1]){
+            return 0;
+        }
+    }
+    return 1;
+}
 int main(){
     struct Array arr = {{2,4,6,8,9},10,5};
-    Reverse2(arr);
+    InsertSort(arr,7);
+    cout<<isSorted(arr)<<endl;
     Display(arr);
     return 0;
 }
