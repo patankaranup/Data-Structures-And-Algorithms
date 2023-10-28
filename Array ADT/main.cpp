@@ -139,15 +139,28 @@ float Avg(struct Array arr){
     return (float)Sum(arr)/arr.length;
 }
 
+void Reverse(struct Array &arr){
+    int *B;
+    int i, j;
+    B = (int *)malloc(sizeof(int) * arr.length);
+    for(i=arr.length-1, j=0; i>=0; i--, j++){
+        B[j] = arr.A[i];
+    }
+    for(i=0; i<arr.length; i++){
+        arr.A[i] = B[i];
+    }
+}
+
+void Reverse2(struct Array &arr){
+    int i, j;
+    for(i=0, j=arr.length-1; i<j; i++,j--){
+        swap(arr.A[i],arr.A[j]);
+    }
+}
+
 int main(){
     struct Array arr = {{2,4,6,8,9},10,5};
-    cout<<get(arr,2)<<endl;
-    set(arr,3,3);
-    Display(arr);
-    cout<<maximum(arr)<<endl;
-    cout<<minimum(arr)<<endl;
-    cout<<Sum(arr)<<endl;
-    cout<<Avg(arr)<<endl;
+    Reverse2(arr);
     Display(arr);
     return 0;
 }
