@@ -180,10 +180,31 @@ int isSorted(struct Array arr){
     }
     return 1;
 }
+
+void rearrange(struct Array &arr){
+    int i,j;
+    i = 0;
+    j = arr.length - 1;
+    while (i<j)
+    {
+        while (arr.A[i]<0)
+        {
+            i++;
+        }
+        while (arr.A[j]>=0)
+        {
+            j--;
+        }
+        if(i<j){
+            swap(arr.A[i],arr.A[j]);
+        }
+    }
+    
+}
+
 int main(){
-    struct Array arr = {{2,4,6,8,9},10,5};
-    InsertSort(arr,7);
-    cout<<isSorted(arr)<<endl;
+    struct Array arr = {{2,-3,-5,-2,3,6,7},10,7};
+    rearrange(arr);
     Display(arr);
     return 0;
 }
