@@ -225,11 +225,88 @@ struct Array* merge(struct Array arr1, struct Array arr2){
     return arr3;
 }
 
+struct Array* Union(struct Array arr1, struct Array arr2){
+    // Time complexity O(m+n) because array is sorted 
+    int i,j,k;
+    i=j=k=0;
+    struct Array *arr3 = (struct Array * )malloc(sizeof(struct Array));
+
+    while(i<arr1.length && j<arr2.length){
+        if(arr1.A[i]<arr2.A[j]){
+            arr3->A[k++] = arr1.A[i++];
+        } else if(arr2.A[j]<arr1.A[i]){
+            arr3->A[k++] = arr2.A[j++];
+        } else {
+            // both are equal 
+            arr3->A[k++] = arr1.A[i++];
+            j++;
+        }
+    }
+    for(;i<arr1.length; i++){
+        arr3->A[k++] = arr1.A[i];
+    }
+    for(;j<arr2.length; i++){
+        arr3->A[k++] = arr2.A[j];
+    }
+    arr3->length = k;
+    arr3->size = 10;
+    return arr3;
+}
+
+struct Array* Intersection(struct Array arr1, struct Array arr2){
+    // Time complexity O(m+n) because array is sorted 
+    int i,j,k;
+    i=j=k=0;
+    struct Array *arr3 = (struct Array * )malloc(sizeof(struct Array));
+
+    while(i<arr1.length && j<arr2.length){
+        if(arr1.A[i]<arr2.A[j]){
+            // element is small go for next one 
+            i++;
+        } else if(arr2.A[j]<arr1.A[i]){
+            j++;
+        } else if(arr1.A[i] == arr2.A[j]){
+            // both are equal then copy 
+            arr3->A[k++] = arr1.A[i++];
+            j++;
+        }
+    }
+    arr3->length = k;
+    arr3->size = 10;
+    return arr3;
+}
+
+struct Array* Difference(struct Array arr1, struct Array arr2){
+    // Time complexity O(m+n) because array is sorted 
+    int i,j,k;
+    i=j=k=0;
+    struct Array *arr3 = (struct Array * )malloc(sizeof(struct Array));
+
+    while(i<arr1.length && j<arr2.length){
+        if(arr1.A[i]<arr2.A[j]){
+            arr3->A[k++] = arr1.A[i++];
+        } else if(arr2.A[j]<arr1.A[i]){
+            j++;
+        } else {
+            i++;
+            j++;
+        }
+    }
+    // copy remaining elements from array 1 
+    for(;i<arr1.length; i++){
+        arr3->A[k++] = arr1.A[i];
+    }
+    arr3->length = k;
+    arr3->size = 10;
+    return arr3;
+}
+
 int main(){
     struct Array arr1= {{2,6,10,15,25},10,5};
-    struct Array arr2= {{3,5,9,16,23},10,5};
+    struct Array arr2= {{3,6,9,15,23},10,5};
     struct Array *arr3;
-    arr3 = merge(arr1,arr2);
+    // arr1 - arr2 
+    arr3 = Difference(arr1,arr2);
     Display(*arr3);
     return 0;
 }
